@@ -62,7 +62,7 @@ module Micropublish
     end
 
     def text_fields
-      %w(name content summary bookmark in_reply_to repost_of like_of)
+      %w(name content summary bookmark_of in_reply_to repost_of like_of)
     end
 
     def reply_username(url)
@@ -77,8 +77,8 @@ module Micropublish
         note:     { label: 'Note', icon: 'comment', fields: %i(content) },
         article:  { label: 'Article', icon: 'file-text',
                     fields: %i(name content) },
-        bookmark: { label: 'Bookmark', icon: 'bookmark',
-                    fields: %i(bookmark name content) },
+        bookmark: { label: 'Bookmark Of', icon: 'bookmark',
+                    fields: %i(bookmark_of name content) },
         reply:    { label: 'Reply', icon: 'reply',
                     fields: %i(in_reply_to content) },
         repost:   { label: 'Repost', icon: 'retweet', fields: %i(repost_of content) },

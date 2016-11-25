@@ -18,11 +18,11 @@
 <br>
 <form action="/create" method="post">
 
-  <% if post_types[@post_type][:fields].include?(:bookmark) %>
+  <% if post_types[@post_type][:fields].include?(:bookmark_of) %>
     <div class="form-group">
-      <label for="bookmark">Bookmark</label>
-      <input type="url" class="form-control" name="bookmark" id="bookmark"
-        placeholder="http://" value="<%= h params['bookmark'] %>">
+      <label for="bookmark_of">Bookmark Of</label>
+      <input type="url" class="form-control" name="bookmark_of" id="bookmark_of"
+        placeholder="http://" value="<%= h params['bookmark_of'] %>">
     </div>
   <% end %>
 
