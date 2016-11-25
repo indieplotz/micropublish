@@ -76,7 +76,7 @@ module Micropublish
         note:     { label: 'Note', icon: 'comment', fields: %i(content) },
         article:  { label: 'Article', icon: 'file-text',
                     fields: %i(name content) },
-        bookmark: { label: 'Bookmark Of', icon: 'bookmark',
+        bookmark: { label: 'Bookmark', icon: 'bookmark',
                     fields: %i(bookmark_of name content) },
         reply:    { label: 'Reply', icon: 'reply',
                     fields: %i(in_reply_to content) },
