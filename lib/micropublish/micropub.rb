@@ -14,7 +14,7 @@ module Micropublish
     def body_from_params(params)
       entry = { 'h' => 'entry' }
       unless params['category'].empty?
-        entry['category'] = params['category'].split(' ').join(',')
+        entry['category'] = params['category'].split(' ')
       end
       unless !params.key?('syndicate_to') || params['syndicate_to'].empty?
         entry['syndicate-to'] = params['syndicate_to'].split(',')
@@ -29,10 +29,10 @@ module Micropublish
     end
 
     def syndicate_to(url, token)
-      headers = { 
-        'Authorization' => "Bearer #{token}", 
+      headers = {
+        'Authorization' => "Bearer #{token}",
         'Content-Type' => 'application/json',
-        'Accept' => 'application/json' 
+        'Accept' => 'application/json'
       }
       query = { q: 'syndicate-to' }
       response = HTTParty.get(url, query: query, headers: headers)
@@ -43,7 +43,7 @@ module Micropublish
         json = JSON.parse(response.body)
         return json['syndicate-to']
       rescue JSON::ParserError
-        # this approach is deprecated and will be removed 
+        # this approach is deprecated and will be removed
         response_hash = CGI.parse(response.parsed_response)
         if response_hash.key?('syndicate-to')
           syndications_array = response_hash['syndicate-to'].first.split(',')
