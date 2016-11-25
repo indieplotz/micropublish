@@ -7,8 +7,7 @@ module Micropublish
       headers = { 'Authorization' => "Bearer #{token}" }
       response = HTTParty.post(url, body: body, headers: headers)
       puts "micropub response=#{response.inspect}"
-      return if response.code != 201 # created
-      return response.headers['location'] if response.headers.key?('location')
+      response.headers['location'] if response.headers.key?('location')
     end
 
     def body_from_params(params)
