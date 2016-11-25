@@ -3,14 +3,14 @@ module Micropublish
     configure do
       set :views, "#{File.dirname(__FILE__)}/../../views"
       set :public_folder, "#{File.dirname(__FILE__)}/../../public"
-      
+
       # ensure ssl
       use Rack::SSL unless settings.development?
-      
+
       # use a cookie that lasts for 30 days
       secret = ENV['COOKIE_SECRET'] || Random.new_seed.to_s
       use Rack::Session::Cookie, secret: secret, expire_after: 2_592_000
-      
+
       use Rack::Flash
     end
 
@@ -62,7 +62,7 @@ module Micropublish
       logout!
     end
 
-    get %r{^/new/?(note|article|bookmark|reply|repost|like)?/?$} do |post_type|
+    get %r{^/new/?(note|article|bookmark|reply|repost|like|rsvp)?/?$} do |post_type|
       require_session
       if post_type == 'reply' && params.key?('in_reply_to')
         reply_username = Micropub.reply_username(params['in_reply_to'])
@@ -74,7 +74,7 @@ module Micropublish
 
     post '/create' do
       require_session
-      post_url = Micropub.post(session[:micropub_endpoint], 
+      post_url = Micropub.post(session[:micropub_endpoint],
                                params,
                                session[:token])
       if post_url.nil?
@@ -83,11 +83,11 @@ module Micropublish
         redirect post_url
       end
     end
-    
+
     get '/about' do
       erb :about
     end
-    
+
     get '/twitter-text.js' do
       send_file "#{File.dirname(__FILE__)}/../../vendor/twitter-text/js/twitter-text.js"
     end
@@ -114,7 +114,7 @@ module Micropublish
       session[:syndicate_to] ||= Micropub.syndicate_to(
         session[:micropub_endpoint], session[:token])
     end
-    
+
     def base_url
       # explicitly set base url from optional ENV var (needed in case we're proxying)
       ENV['BASE_URL'] || request.base_url

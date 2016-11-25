@@ -81,7 +81,9 @@ module Micropublish
         reply:    { label: 'Reply', icon: 'reply',
                     fields: %i(in_reply_to content) },
         repost:   { label: 'Repost', icon: 'retweet', fields: %i(repost_of content) },
-        like:     { label: 'Like', icon: 'heart', fields: %i(like_of) }
+        like:     { label: 'Like', icon: 'heart', fields: %i(like_of) },
+        rsvp:     { label: 'RSVP', icon: 'calendar',
+                    fields: %i(in_reply_to content rsvp) }
       }
     end
 

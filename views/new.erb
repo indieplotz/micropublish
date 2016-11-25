@@ -50,6 +50,18 @@
     </div>
   <% end %>
 
+  <% if post_types[@post_type][:fields].include?(:rsvp) %>
+    <div class="form-group">
+      <label for="rsvp">RSVP</label>
+      <select class="form-control" name="rsvp" id="rsvp">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+        <option value="maybe">Maybe</option>
+        <option value="interested">Interested</option>
+      </select>
+    </div>
+  <% end %>
+
   <% if post_types[@post_type][:fields].include?(:name) %>
     <div class="form-group">
       <label for="name">Name</label>
